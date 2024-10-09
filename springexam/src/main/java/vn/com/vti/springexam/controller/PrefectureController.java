@@ -6,12 +6,16 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import vn.com.vti.springexam.entity.Prefecture;
+import vn.com.vti.springexam.entity.PrefectureCustom;
 import vn.com.vti.springexam.entity.PrefectureExample;
+import vn.com.vti.springexam.mapper.PrefectureCustomMapper;
 import vn.com.vti.springexam.mapper.PrefectureMapper;
 
 @Controller
@@ -20,6 +24,16 @@ public class PrefectureController {
 
 	@Autowired
 	private PrefectureMapper prefectureMapper;
+	
+	@Autowired
+	private PrefectureCustomMapper prefectureCustomMapper;
+	
+	@GetMapping("data")
+	@ResponseBody
+	public List<PrefectureCustom> searchByName(@RequestParam String prefectureName){
+		List<PrefectureCustom> prefectureList = prefectureCustomMapper.selectByNamePart("%"+prefectureName+"%");
+		return prefectureList;
+	}
 	
 	@RequestMapping("input")//chi dinh url
 	public String input() {

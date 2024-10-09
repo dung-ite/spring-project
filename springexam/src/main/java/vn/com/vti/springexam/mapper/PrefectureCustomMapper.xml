@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="vn.com.vti.springexam.mapper.PrefectureCustomMapper">
+	<resultMap type="vn.com.vti.springexam.entity.PrefectureCustom" id="preCustomized">
+		<id column="id" jdbcType="INTEGER" property="id" />
+	    <result column="name" jdbcType="VARCHAR" property="name" />
+	    <result column="population" jdbcType="INTEGER" property="population" />
+	    <result column="section8_id" jdbcType="INTEGER" property="section8Id" />
+	    <result column="section3_id" jdbcType="INTEGER" property="section3Id" />
+	    <result column="is_government_designed_city" jdbcType="BIT" property="isGovernmentDesignedCity" />
+	    <result column="infrastructure_name" jdbcType="VARCHAR" property="infrastructureName" />
+	    <result column="regist_date" jdbcType="DATE" property="registDate" />
+	</resultMap>
+	
+	<select id="selectByNamePart" resultMap="preCustomized">
+		SELECT	
+			P.*
+			, PI.infrastructure_id
+			, i.name as infrastructure_name
+			, i.regist_date
+		FROM
+			PREFECTURE AS P
+			INNER JOIN prefecture_infrastructure as pi
+				on p.id = pi.prefecture_id
+			left outer join infrastructure as i
+				on i.id = pi.infrastructure_id
+		WHERE
+			P.name LIKE #{prefectureName}
+	</select>
+	
+	
+</mapper>

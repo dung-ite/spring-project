@@ -10,6 +10,7 @@
 	<title>書籍一覧</title>
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 	<script type="text/javascript">
+	
 		function search(){
 			var keyword = $('#keyword').val();
 						 // document.getElementById('keyword').value
@@ -21,9 +22,9 @@
 				}
 				,success: function(result){
 					
-					$('#bookList').html("");//xoa noi dung trong the id la bookList
+					$('#bookList').html("");//xoa noi dung trong the co id la bookList
 					/* ------ */
-					$('#bookList').append("<ul>");
+					$('#bookList').append("<ul>");//chèn nội dung <ul> vào thẻ div có ID là bookList
 					for(var i=0; i<result.length; i++){
 						$('#bookList').append("<li>");
 							$('#bookList').append("<image src='https://picsum.photos/id/237/200/300'/><br>");
@@ -39,7 +40,7 @@
 	</script>
 </head>
 <body>
-	<input name="bookName" id="keyword" type="text"/>
+	<input name="bookName" id="keyword" type="text" />
 	<button onclick="search()">検索</button>
 
 	<div id="bookList"></div>
